@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <div>
+    <nav>
       <Link to="/home">
         <button onClick={handleHomeButton}>Home</button>
       </Link>
@@ -31,7 +31,7 @@ const Navbar = () => {
       <Link to="/users">
         <button onClick={handleUsersButton}>Users</button>
       </Link>
-    </div>
+    </nav>
   );
 };
 

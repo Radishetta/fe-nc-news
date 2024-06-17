@@ -3,16 +3,22 @@ import ArticleCard from "./ArticleCard";
 import { getArticles } from "../../utils/api";
 
 const Articles = () => {
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    setisLoading(true);
-    getArticles().then(({ articles }) => {
-      setArticles(articles);
-      setisLoading(false);
-    });
-  }, [articles]);
+    setIsLoading(true);
+    getArticles()
+      .then(({ articles }) => {
+        setArticles(articles);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log("Unable to retrieve the list of articles");
+        throw err;
+      });
+  }, []);
+
   isLoading ? <h1>LOADING...</h1> : null;
   return (
     <ul>
