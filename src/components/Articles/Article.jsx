@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleByID, getCommentsByArticleID } from "../../utils/api";
+import { getArticleByID, getCommentsByArticleID, updateArticleVote } from "../../utils/api";
 import CommentCard from "../Comments/CommentCard";
 import "../../styles/Article.css";
 
@@ -10,6 +10,8 @@ const Article = () => {
   const [comments, setComments] = useState([]);
   const { article_id } = useParams();
   const { author, title, topic, created_at, votes, article_img_url, comment_count } = article;
+  const [voteChange, setVoteChange] = useState(0);
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,8 +21,7 @@ const Article = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        setIsLoading(false);
-        console.log("No article with that ID");
+        isLoading(false);
         throw err;
       });
 
@@ -30,10 +31,28 @@ const Article = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log("No comments with that article ID");
+        isLoading(false);
         throw err;
       });
   }, []);
+
+  const handleVoteUpButton = () => {
+    setVoteChange(voteChange + 1);
+    updateArticleVote(article_id, 1).catch((err) => {
+      setVoteChange(voteChange - 1);
+      setErr("Something went wrong, please try again.");
+    });
+  };
+
+  const handleVoteDownButton = () => {
+    setVoteChange(voteChange - 1);
+    updateArticleVote(article_id, -1).catch((err) => {
+      setVoteChange(voteChange + 1);
+      setErr("Something went wrong, please try again.");
+    });
+  };
+
+  const newVotes = voteChange + votes;
 
   isLoading ? <h1>LOADING...</h1> : null;
 
@@ -49,10 +68,15 @@ const Article = () => {
           <div className="bottom-wrapper">
             <p>Topic: {topic}</p>
             <div className="votes-wrapper">
-              <p className="votes">Votes: {votes}</p>
-              <button className="vote-btn">VOTE UP </button>
-              <button className="vote-btn">VOTE DOWN</button>
+              <p className="votes">Votes: {newVotes}</p>
+              <button onClick={handleVoteUpButton} className="vote-btn">
+                VOTE UP
+              </button>
+              <button onClick={handleVoteDownButton} className="vote-btn">
+                VOTE DOWN
+              </button>
             </div>
+            {err ? <p>{err}</p> : null}
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { getArticles } from "../../utils/api";
 const Articles = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [articles, setArticles] = useState([]);
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -14,7 +15,7 @@ const Articles = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log("Unable to retrieve the list of articles");
+        isLoading(false);
         throw err;
       });
   }, []);
