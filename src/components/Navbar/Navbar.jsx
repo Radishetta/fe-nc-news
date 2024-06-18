@@ -17,6 +17,10 @@ const Navbar = () => {
     navigate("/users");
   };
 
+  const handleTopicOptions = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <nav>
       <Link to="/home">
@@ -26,7 +30,12 @@ const Navbar = () => {
         <button onClick={handleArticlesButton}>Articles</button>
       </Link>
       <Link to="/topics">
-        <button onClick={handleTopicsButton}>Topics</button>
+        <select onClick={handleTopicOptions} name="topics" id="topics">
+          <option value="default">Topics</option>
+          <option value="coding">Coding</option>
+          <option value="football">Football</option>
+          <option value="cooking">Cooking</option>
+        </select>
       </Link>
       <Link to="/users">
         <button onClick={handleUsersButton}>Users</button>

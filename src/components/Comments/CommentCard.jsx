@@ -3,7 +3,7 @@ import "../../styles/CommentCard.css";
 const CommentCard = ({ comment }) => {
   const { body, author, votes } = comment;
   return (
-    <div className="comment-card-wrapper">
+    <section className="comment-card-container">
       <div className="comment-card-body">
         <p>
           <strong>{author}</strong>
@@ -13,7 +13,7 @@ const CommentCard = ({ comment }) => {
           <p>Votes: {votes}</p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

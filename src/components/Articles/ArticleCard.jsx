@@ -6,22 +6,24 @@ const ArticleCard = ({ article }) => {
     article;
 
   return (
-    <Link to={`/articles/${article_id}`}>
-      <div className="article-card-wrapper">
-        <img className="article-card-img" src={article_img_url} alt={`Image of ${title}`} />
-        <div className="article-card-body">
-          <p>
-            <strong>{title}</strong>
-          </p>
-          <p id="author">By {author}</p>
-          <div className="bottom-wrapper">
-            <p>Topic: {topic}</p>
-            <p>Comments: {comment_count}</p>
-            <p>Votes: {votes}</p>
+    <div className="articles">
+      <Link to={`/articles/${article_id}`}>
+        <section className="article-card-container">
+          <img className="article-card-img" src={article_img_url} alt={`Image of ${title}`} />
+          <div className="article-card-body">
+            <p>
+              <strong>{title}</strong>
+            </p>
+            <p id="author">By {author}</p>
+            <div className="bottom-wrapper">
+              <p>Topic: {topic}</p>
+              <p>Comments: {comment_count}</p>
+              <p>Votes: {votes}</p>
+            </div>
           </div>
-        </div>
-      </div>
-    </Link>
+        </section>
+      </Link>
+    </div>
   );
 };
 
