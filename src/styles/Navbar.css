@@ -1,0 +1,17 @@
+select {
+  margin: 5px;
+  background-color: lightgray;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: lightgray;
+  border: 1px solid gray;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+option {
+  font-size: 0.8rem;
+}
