@@ -113,9 +113,7 @@ const Article = () => {
           id="newComment"
           placeholder="Add your comment..."
         ></textarea>
-        <button disabled={newComment.length === 0 || newComment.length < 10}>
-          ADD NEW COMMENT
-        </button>
+        <button disabled={newComment.length < 10 || isLoadingComment}>ADD NEW COMMENT</button>
       </form>
       <ul>
         {comments.map((comment) => {
