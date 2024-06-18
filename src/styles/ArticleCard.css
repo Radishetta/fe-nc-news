@@ -1,0 +1,36 @@
+.article-card-wrapper {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.87);
+  max-width: 325px;
+  height: 380px;
+}
+
+.article-ul-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.bottom-wrapper {
+  margin-bottom: 0;
+  line-height: 0.4;
+}
+
+.article-card-img {
+  height: 200px;
+  width: 300px;
+  border-radius: 8px;
+}
+
+#author {
+  text-align: center;
+  font-weight: bold;
+}
+
+.article-card-body {
+  text-align: left;
+}

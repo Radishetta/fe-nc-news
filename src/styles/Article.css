@@ -1,0 +1,33 @@
+.article-comment-wrapper {
+  max-width: 325px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.bottom-wrapper {
+  margin-bottom: 0;
+  line-height: 0.4;
+}
+
+.article-card-img {
+  height: 200px;
+  width: 300px;
+}
+
+#author {
+  text-align: center;
+  font-weight: bold;
+}
+
+.article-card-body {
+  text-align: left;
+}
+
+.vote-btn {
+  padding: 5px;
+  font-size: 0.8rem;
+}
+.votes-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
