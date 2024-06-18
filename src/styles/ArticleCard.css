@@ -2,11 +2,19 @@
   border: 1px solid black;
   border-radius: 8px;
   padding: 10px;
-  padding-bottom: 5;
+  margin-top: 50px;
   margin-bottom: 20px;
-  display: flexbox;
   color: rgba(255, 255, 255, 0.87);
+  max-width: 325px;
+  height: 380px;
 }
+
+.article-ul-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 .bottom-wrapper {
   margin-bottom: 0;
   line-height: 0.4;

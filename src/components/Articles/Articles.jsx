@@ -21,7 +21,7 @@ const Articles = () => {
 
   isLoading ? <h1>LOADING...</h1> : null;
   return (
-    <ul>
+    <ul className="article-ul-wrapper">
       {articles.map((article) => {
         return <ArticleCard article={article} key={article.article_id} />;
       })}

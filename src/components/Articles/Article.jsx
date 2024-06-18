@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleByID, getCommentsByArticleID } from "../../utils/api";
+import CommentCard from "../Comments/CommentCard";
 import "../../styles/Article.css";
 
 const Article = () => {
@@ -24,7 +25,7 @@ const Article = () => {
       });
 
     getCommentsByArticleID(article_id)
-      .then((comments) => {
+      .then(({ comments }) => {
         setComments(comments);
         setIsLoading(false);
       })
@@ -33,30 +34,33 @@ const Article = () => {
         throw err;
       });
   }, []);
-  console.log(comments);
 
   isLoading ? <h1>LOADING...</h1> : null;
 
   return (
-    <div className="article-card-wrapper">
-      <img className="article-card-img" src={article_img_url} alt={`Image of ${title}`} />
-      <div className="article-card-body">
-        <p>
-          <strong>{title}</strong>
-        </p>
-        <p id="author">By {author}</p>
-        <div className="bottom-wrapper">
-          <p>Topic: {topic}</p>
-          <div className="votes-wrapper">
-            <p className="votes">Votes: {votes}</p>
-            <button className="vote-btn">VOTE UP </button>
-            <button className="vote-btn">VOTE DOWN</button>
+    <div className="article-comment-wrapper">
+      <div className="article-card-wrapper">
+        <img className="article-card-img" src={article_img_url} alt={`Image of ${title}`} />
+        <div className="article-card-body">
+          <p>
+            <strong>{title}</strong>
+          </p>
+          <p id="author">By {author}</p>
+          <div className="bottom-wrapper">
+            <p>Topic: {topic}</p>
+            <div className="votes-wrapper">
+              <p className="votes">Votes: {votes}</p>
+              <button className="vote-btn">VOTE UP </button>
+              <button className="vote-btn">VOTE DOWN</button>
+            </div>
           </div>
-          {/* {comments.map((comment) => {
-            return <CommentCard comment={comment} key={comment.comment_id} />;
-          })} */}
         </div>
       </div>
+      <ul>
+        {comments.map((comment) => {
+          return <CommentCard comment={comment} key={comment.comment_id} />;
+        })}
+      </ul>
     </div>
   );
 };
