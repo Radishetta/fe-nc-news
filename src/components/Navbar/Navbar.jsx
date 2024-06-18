@@ -1,7 +1,20 @@
 import { useNavigate, Link } from "react-router-dom";
+import { UsersContext } from "../../contexts/UsersContext";
+import { useEffect, useState, useContext } from "react";
+import { getTopics } from "../../utils/api";
+import "../../styles/Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [topics, setTopics] = useState([]);
+  const { users, setLoggedUser } = useContext(UsersContext);
+
+  useEffect(() => {
+    getTopics().then(({ topics }) => {
+      setTopics(topics);
+    });
+  }, []);
+
   const handleHomeButton = () => {
     navigate("/home");
   };
@@ -9,16 +22,16 @@ const Navbar = () => {
     navigate("/articles");
   };
 
-  const handleTopicsButton = () => {
-    navigate("/topics");
-  };
-
-  const handleUsersButton = () => {
-    navigate("/users");
-  };
-
   const handleTopicOptions = (e) => {
     e.preventDefault();
+  };
+
+  const handleUserOptions = (e) => {
+    if (e.target.value === "Log in...") {
+      setLoggedUser("");
+    } else {
+      setLoggedUser(e.target.value);
+    }
   };
 
   return (
@@ -29,17 +42,28 @@ const Navbar = () => {
       <Link to="/articles">
         <button onClick={handleArticlesButton}>Articles</button>
       </Link>
-      <Link to="/topics">
-        <select onClick={handleTopicOptions} name="topics" id="topics">
-          <option value="default">Topics</option>
-          <option value="coding">Coding</option>
-          <option value="football">Football</option>
-          <option value="cooking">Cooking</option>
-        </select>
-      </Link>
-      <Link to="/users">
-        <button onClick={handleUsersButton}>Users</button>
-      </Link>
+      <select onClick={handleTopicOptions} name="topics" id="topics">
+        <option key="topics" value="default">
+          Topics
+        </option>
+        {topics.map((topic) => {
+          return (
+            <option value={topic.slug} key={topic.slug}>
+              {topic.slug}
+            </option>
+          );
+        })}
+      </select>
+      <select onClick={handleUserOptions} name="users" id="users">
+        <option key="Users">Log in...</option>
+        {users.map((user) => {
+          return (
+            <option value={user.username} key={user.user_id}>
+              {user.username}
+            </option>
+          );
+        })}
+      </select>
     </nav>
   );
 };

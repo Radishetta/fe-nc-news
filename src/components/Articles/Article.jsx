@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UsersContext } from "../../contexts/UsersContext";
 import { useParams } from "react-router-dom";
 import {
   getArticleByID,
@@ -19,6 +20,7 @@ const Article = () => {
   const [voteChange, setVoteChange] = useState(0);
   const [err, setErr] = useState(null);
   const [newComment, setNewComment] = useState("");
+  const { loggedUser } = useContext(UsersContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -65,7 +67,7 @@ const Article = () => {
   const handleSubmitComment = (e) => {
     e.preventDefault();
     setIsLoadingComment(true);
-    postComment(article_id, newComment).then(({ newComment }) => {
+    postComment(article_id, newComment, loggedUser).then(({ newComment }) => {
       setComments((currentComments) => {
         return [newComment, ...currentComments];
       });
@@ -117,7 +119,7 @@ const Article = () => {
       </form>
       <ul>
         {comments.map((comment) => {
-          return <CommentCard comment={comment} key={comment.comment_id} />;
+          return <CommentCard article={article} comment={comment} key={comment.comment_id} />;
         })}
       </ul>
     </div>

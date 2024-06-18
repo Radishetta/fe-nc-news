@@ -1,10 +1,15 @@
+import { useContext, useEffect } from "react";
+import { UsersContext } from "../../contexts/UsersContext";
+import { getUsers } from "../../utils/api";
+
 const Users = () => {
-  return (
-    <ul>
-      <li>User 1</li>
-      <li>User 2</li>
-    </ul>
-  );
+  const { users, setUsers } = useContext(UsersContext);
+
+  useEffect(() => {
+    getUsers().then(({ users }) => {
+      setUsers(users);
+    });
+  }, []);
 };
 
 export default Users;

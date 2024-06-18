@@ -46,9 +46,42 @@ export const updateArticleVote = (id, body) => {
     });
 };
 
-export const postComment = (id, newComment) => {
+export const postComment = (id, newComment, user) => {
   return ncNewsAPI
-    .post(`/articles/${id}/comments`, { username: "grumpy19", body: newComment })
+    .post(`/articles/${id}/comments`, { username: user, body: newComment })
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      return Promise.reject(err.data);
+    });
+};
+
+export const deleteComment = (id) => {
+  return ncNewsAPI
+    .delete(`/articles/${id}/comments`)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      return Promise.reject(err.data);
+    });
+};
+
+export const getUsers = () => {
+  return ncNewsAPI
+    .get("/users")
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      return Promise.reject(err.data);
+    });
+};
+
+export const getTopics = () => {
+  return ncNewsAPI
+    .get("/topics")
     .then(({ data }) => {
       return data;
     })
