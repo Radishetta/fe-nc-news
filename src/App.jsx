@@ -1,4 +1,4 @@
-import "./App.css";
+import "./styles/App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Header from "./components/Header/Header";
 import { Routes, Route } from "react-router-dom";
@@ -7,7 +7,7 @@ import Article from "./components/Articles/Article";
 import Users from "./components/Users/Users";
 function App() {
   return (
-    <main className="app">
+    <main>
       <Header />
       <Navbar />
       <Routes>

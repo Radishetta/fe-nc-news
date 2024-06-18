@@ -1,33 +1,49 @@
-.article-comment-wrapper {
-  max-width: 325px;
+.article {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 }
-.bottom-wrapper {
-  margin-bottom: 0;
-  line-height: 0.4;
+
+.article-card-container {
+  background-color: beige;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 10px;
+  width: 375px;
 }
 
 .article-card-img {
-  height: 200px;
-  width: 300px;
+  margin-top: 5px;
+  border-radius: 8px;
+  height: 300px;
+  width: 365px;
 }
 
-#author {
-  text-align: center;
-  font-weight: bold;
+button {
+  margin: 5px;
 }
 
-.article-card-body {
-  text-align: left;
-}
-
-.vote-btn {
-  padding: 5px;
-  font-size: 0.8rem;
-}
-.votes-wrapper {
+.comment-form {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
+  padding-top: 5px;
+  background-color: bisque;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  width: 375px;
+  height: 100px;
+}
+
+textarea {
+  border-radius: 5px;
+  height: 80px;
+  width: 360px;
+}
+
+ul {
+  padding: 0;
 }

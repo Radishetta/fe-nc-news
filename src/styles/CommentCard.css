@@ -1,16 +1,7 @@
-.comment-card-wrapper {
+.comment-card-container {
+  background-color: bisque;
   border: 1px solid black;
   border-radius: 8px;
-  padding: 5px;
-  margin-top: 15px;
-  color: rgba(255, 255, 255, 0.87);
-  max-height: 800px;
-}
-.bottom-wrapper {
-  margin-bottom: 0;
-  line-height: 0.4;
-}
-
-.comment-card-body {
-  text-align: left;
+  margin-bottom: 10px;
+  width: 375px;
 }
