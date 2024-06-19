@@ -42,10 +42,8 @@ const Navbar = () => {
       <Link to="/articles">
         <button onClick={handleArticlesButton}>Articles</button>
       </Link>
-      <select onClick={handleTopicOptions} name="topics" id="topics">
-        <option key="topics" value="default">
-          Topics
-        </option>
+      <select onClick={handleTopicOptions} name="topics">
+        <option value="default">Topics</option>
         {topics.map((topic) => {
           return (
             <option value={topic.slug} key={topic.slug}>
@@ -54,8 +52,8 @@ const Navbar = () => {
           );
         })}
       </select>
-      <select onClick={handleUserOptions} name="users" id="users">
-        <option key="Users">Log in...</option>
+      <select onClick={handleUserOptions} name="users">
+        <option>Log in...</option>
         {users.map((user) => {
           return (
             <option value={user.username} key={user.user_id}>
