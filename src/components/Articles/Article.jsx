@@ -30,7 +30,7 @@ const Article = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        isLoading(false);
+        setIsLoading(false);
         throw err;
       });
 
@@ -40,7 +40,7 @@ const Article = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        isLoading(false);
+        setIsLoading(false);
         throw err;
       });
   }, []);
