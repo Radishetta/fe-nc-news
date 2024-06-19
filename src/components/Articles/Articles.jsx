@@ -8,12 +8,12 @@ const Articles = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
   const [order, setOrder] = useState("desc");
-  const [sortedBy, setSortedBy] = useState("created_at");
+  const [sortBy, setSortBy] = useState("created_at");
   const { topic } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
-    getArticles(topic, order, sortedBy)
+    getArticles(topic, order, sortBy)
       .then(({ articles }) => {
         setArticles(articles);
         setIsLoading(false);
@@ -22,27 +22,32 @@ const Articles = () => {
         setIsLoading(false);
         throw err;
       });
-  }, [topic, order, sortedBy]);
+  }, [topic, sortBy, order]);
 
   const handleOrderArticles = (e) => {
     setOrder(e.target.value);
   };
 
   const handleSortArticles = (e) => {
-    setSortedBy(e.target.value);
+    setSortBy(e.target.value);
   };
 
   isLoading ? <h1>LOADING...</h1> : null;
   return (
     <>
       <label htmlFor="sort-articles">Sort by</label>
-      <select onClick={handleSortArticles} defaultValue="created_at" name="sort" id="sort-articles">
+      <select
+        onChange={handleSortArticles}
+        defaultValue="created_at"
+        name="sort"
+        id="sort-articles"
+      >
         <option value="created_at">Date</option>
         <option value="comment_count">Comment count</option>
         <option value="votes">Votes</option>
       </select>
       <label htmlFor="order-articles">Order</label>
-      <select onClick={handleOrderArticles} defaultValue="desc" name="order" id="order-articles">
+      <select onChange={handleOrderArticles} defaultValue="desc" name="order" id="order-articles">
         <option value="asc">Ascending</option>
         <option value="desc">Descening</option>
       </select>
