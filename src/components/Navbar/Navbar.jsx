@@ -18,13 +18,6 @@ const Navbar = () => {
   const handleHomeButton = () => {
     navigate("/home");
   };
-  const handleArticlesButton = () => {
-    navigate("/articles");
-  };
-
-  const handleTopicOptions = (e) => {
-    e.preventDefault();
-  };
 
   const handleUserOptions = (e) => {
     if (e.target.value === "Log in...") {
@@ -36,27 +29,21 @@ const Navbar = () => {
 
   return (
     <nav>
-      <Link to="/home">
+      <Link to="/articles">
         <button onClick={handleHomeButton}>Home</button>
       </Link>
-      <Link to="/articles">
-        <button onClick={handleArticlesButton}>Articles</button>
-      </Link>
-      <select onClick={handleTopicOptions} name="topics">
-        <option value="default">Topics</option>
-        {topics.map((topic) => {
-          return (
-            <option value={topic.slug} key={topic.slug}>
-              {topic.slug}
-            </option>
-          );
-        })}
-      </select>
+      {topics.map((topic) => {
+        return (
+          <button key={topic.slug}>
+            <Link to={`/articles/${topic.slug}`}>{topic.slug}</Link>
+          </button>
+        );
+      })}
       <select onClick={handleUserOptions} name="users">
-        <option>Log in...</option>
+        <option value="">Log in...</option>
         {users.map((user) => {
           return (
-            <option value={user.username} key={user.user_id}>
+            <option value={user.username} key={user.username}>
               {user.username}
             </option>
           );

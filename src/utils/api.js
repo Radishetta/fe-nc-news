@@ -2,9 +2,9 @@ import axios from "axios";
 
 const ncNewsAPI = axios.create({ baseURL: "https://nutcracker-news-iaiw.onrender.com/api" });
 
-export const getArticles = () => {
+export const getArticles = (topic) => {
   return ncNewsAPI
-    .get("/articles")
+    .get(`/articles`, { params: { topic: topic } })
     .then(({ data }) => {
       return data;
     })
@@ -27,6 +27,28 @@ export const getArticleByID = (id) => {
 export const getCommentsByArticleID = (id) => {
   return ncNewsAPI
     .get(`/articles/${id}/comments`)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      return Promise.reject(err.data);
+    });
+};
+
+export const getUsers = () => {
+  return ncNewsAPI
+    .get("/users")
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      return Promise.reject(err.data);
+    });
+};
+
+export const getTopics = () => {
+  return ncNewsAPI
+    .get("/topics")
     .then(({ data }) => {
       return data;
     })
@@ -62,28 +84,6 @@ export const deleteComment = (id) => {
     .delete(`/comments/${id}`)
     .then((res) => {
       console.log(`Deleted comment with ID ${id}`);
-    })
-    .catch((err) => {
-      return Promise.reject(err.data);
-    });
-};
-
-export const getUsers = () => {
-  return ncNewsAPI
-    .get("/users")
-    .then(({ data }) => {
-      return data;
-    })
-    .catch((err) => {
-      return Promise.reject(err.data);
-    });
-};
-
-export const getTopics = () => {
-  return ncNewsAPI
-    .get("/topics")
-    .then(({ data }) => {
-      return data;
     })
     .catch((err) => {
       return Promise.reject(err.data);
