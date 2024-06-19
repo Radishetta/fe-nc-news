@@ -66,14 +66,20 @@ const Article = () => {
 
   const handleSubmitComment = (e) => {
     e.preventDefault();
+    setErr(null);
     setIsLoadingComment(true);
-    postComment(article_id, newComment, loggedUser).then(({ newComment }) => {
-      setComments((currentComments) => {
-        return [newComment, ...currentComments];
+    postComment(article_id, newComment, loggedUser)
+      .then(({ newComment }) => {
+        setComments((currentComments) => {
+          return [newComment, ...currentComments];
+        });
+      })
+      .catch((err) => {
+        setIsLoadingComment(false);
+        setErr("Something went wrong, please try again.");
       });
-      setIsLoadingComment(false);
-      setNewComment("");
-    });
+    setIsLoadingComment(false);
+    setNewComment("");
   };
 
   const newVotes = voteChange + votes;
@@ -108,6 +114,7 @@ const Article = () => {
       </div>
       <form onSubmit={handleSubmitComment} className="comment-form">
         {isLoadingComment ? <p>Posting your comment....</p> : null}
+        {err ? <p>{err}</p> : null}
         <textarea
           onChange={handleTextAreaChange}
           name="newComment"
@@ -115,7 +122,9 @@ const Article = () => {
           id="newComment"
           placeholder="Add your comment..."
         ></textarea>
-        <button disabled={newComment.length < 10 || isLoadingComment}>ADD NEW COMMENT</button>
+        <button disabled={newComment.length < 10 || isLoadingComment || !loggedUser}>
+          ADD NEW COMMENT
+        </button>
       </form>
       <ul>
         {comments.map((comment) => {

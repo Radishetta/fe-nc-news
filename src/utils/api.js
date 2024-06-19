@@ -59,9 +59,9 @@ export const postComment = (id, newComment, user) => {
 
 export const deleteComment = (id) => {
   return ncNewsAPI
-    .delete(`/articles/${id}/comments`)
-    .then(({ data }) => {
-      return data;
+    .delete(`/comments/${id}`)
+    .then((res) => {
+      console.log(`Deleted comment with ID ${id}`);
     })
     .catch((err) => {
       return Promise.reject(err.data);
