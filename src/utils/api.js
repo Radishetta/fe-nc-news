@@ -2,9 +2,9 @@ import axios from "axios";
 
 const ncNewsAPI = axios.create({ baseURL: "https://nutcracker-news-iaiw.onrender.com/api" });
 
-export const getArticles = (topic) => {
+export const getArticles = (topic, order, sort) => {
   return ncNewsAPI
-    .get(`/articles`, { params: { topic: topic } })
+    .get(`/articles`, { params: { topic: topic, order: order, sorted_by: sort } })
     .then(({ data }) => {
       return data;
     })
