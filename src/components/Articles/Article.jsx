@@ -33,6 +33,7 @@ const Article = () => {
       .catch((err) => {
         setIsLoading(false);
         setErr("We couldn't get the article with that ID");
+        return <ErrorPage err={err} />;
       });
 
     getCommentsByArticleID(article_id)
