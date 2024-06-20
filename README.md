@@ -2,7 +2,7 @@
 
 > ## Intro
 >
-> [**NC NEWS**](https://nut-cracker-news.netlify.app/) is a front-end news website built in React using Node.js as part of my journey through the [Northcoders](https://northcoders.com/) Bootcamp. The complete project is built in two parts (back-end and front-end) the associated links are supplied further down. <br>Users can see articles, sort them, up-vote, down-vote, add and delete comments with their own users, etc...
+> [**NC NEWS**](https://nut-cracker-news.netlify.app/) is a news website built in React using Node.js as part of my journey through the [Northcoders](https://northcoders.com/) Bootcamp. The complete project is built in two parts (back-end and front-end) the associated links are supplied further down. <br>Users can see articles, sort them, up-vote, down-vote, add and delete comments with their own users, etc...
 
 ## Links
 
