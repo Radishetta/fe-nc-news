@@ -33,6 +33,10 @@ const Navbar = () => {
     }
   };
 
+  const handleTopicButton = (e) => {
+    navigate(`/articles/${e.target.innerHTML}`);
+  };
+
   err ? <ErrorPage err={err} /> : null;
   return (
     <nav>
@@ -41,8 +45,8 @@ const Navbar = () => {
       </Link>
       {topics.map((topic) => {
         return (
-          <button key={topic.slug}>
-            <Link to={`/articles/${topic.slug}`}>{topic.slug}</Link>
+          <button onClick={handleTopicButton} key={topic.slug}>
+            {topic.slug}
           </button>
         );
       })}
