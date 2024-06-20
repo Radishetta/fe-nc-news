@@ -3,12 +3,14 @@ import ArticleCard from "./ArticleCard";
 import { getArticles } from "../../utils/api";
 import "../../styles/Articles.css";
 import { useParams } from "react-router-dom";
+import ErrorPage from "../Error/ErrorPage";
 
 const Articles = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [articles, setArticles] = useState([]);
   const [order, setOrder] = useState("desc");
   const [sortBy, setSortBy] = useState("created_at");
+  const [err, setErr] = useState(null);
   const { topic } = useParams();
 
   useEffect(() => {
@@ -20,7 +22,9 @@ const Articles = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        throw err;
+        if (err.response.data.msg === "Topic Not Found") {
+          setErr("We couldn't find the topic you are looking for");
+        } else setErr("We couldn't load the articles");
       });
   }, [topic, sortBy, order]);
 
@@ -33,6 +37,9 @@ const Articles = () => {
   };
 
   isLoading ? <h1>LOADING...</h1> : null;
+  if (err && err !== "Something went wrong, please try again.") {
+    return <ErrorPage err={err} />;
+  }
   return (
     <>
       <label htmlFor="sort-articles">Sort by</label>
