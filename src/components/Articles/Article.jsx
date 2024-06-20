@@ -8,11 +8,12 @@ import {
   postComment,
 } from "../../utils/api";
 import CommentCard from "../Comments/CommentCard";
+import ErrorPage from "../Error/ErrorPage";
 import "../../styles/Article.css";
 
 const Article = () => {
   const [article, setArticle] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoadingComment, setIsLoadingComment] = useState(false);
   const [comments, setComments] = useState([]);
   const { article_id } = useParams();
@@ -31,7 +32,7 @@ const Article = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        throw err;
+        setErr("We couldn't get the article with that ID");
       });
 
     getCommentsByArticleID(article_id)
@@ -41,7 +42,7 @@ const Article = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        throw err;
+        setErr("We couldn't get the comments for that article");
       });
   }, []);
 
@@ -84,8 +85,14 @@ const Article = () => {
 
   const newVotes = voteChange + votes;
 
-  if (isLoading) {
-    return <h1>LOADING...</h1>;
+  isLoading ? <h1>LOADING...</h1> : null;
+
+  if (
+    err &&
+    err !== "Something went wrong, please try again." &&
+    err !== "We couldn't get the comments for that article"
+  ) {
+    return <ErrorPage err={err} />;
   }
 
   return (
@@ -126,6 +133,7 @@ const Article = () => {
           ADD NEW COMMENT
         </button>
       </form>
+      {err === "We couldn't get the comments for that article" ? <ErrorPage err={err} /> : null}
       <ul>
         {comments.map((comment) => {
           return <CommentCard article={article} comment={comment} key={comment.comment_id} />;

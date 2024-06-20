@@ -2,21 +2,27 @@ import { useNavigate, Link } from "react-router-dom";
 import { UsersContext } from "../../contexts/UsersContext";
 import { useEffect, useState, useContext } from "react";
 import { getTopics } from "../../utils/api";
+import ErrorPage from "../Error/ErrorPage";
 import "../../styles/Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [topics, setTopics] = useState([]);
   const { users, setLoggedUser } = useContext(UsersContext);
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
-    getTopics().then(({ topics }) => {
-      setTopics(topics);
-    });
+    getTopics()
+      .then(({ topics }) => {
+        setTopics(topics);
+      })
+      .catch((err) => {
+        setErr("We couldn't laod the topics");
+      });
   }, []);
 
   const handleHomeButton = () => {
-    navigate("/home");
+    navigate("/articles");
   };
 
   const handleUserOptions = (e) => {
@@ -27,6 +33,7 @@ const Navbar = () => {
     }
   };
 
+  err ? <ErrorPage err={err} /> : null;
   return (
     <nav>
       <Link to="/articles">
