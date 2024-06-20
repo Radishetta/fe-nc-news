@@ -22,7 +22,9 @@ const Articles = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        setErr("We couldn't load the articles");
+        if (err.response.data.msg === "Topic Not Found") {
+          setErr("We couldn't find the topic you are looking for");
+        } else setErr("We couldn't load the articles");
       });
   }, [topic, sortBy, order]);
 

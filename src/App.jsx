@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Articles from "./components/Articles/Articles";
 import Article from "./components/Articles/Article";
 import Users from "./components/Users/Users";
-import ErrorRoute from "./components/Error/ErrorRoute";
+import ErrorPage from "./components/Error/ErrorPage";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Navbar />
       <Users />
       <Routes>
-        <Route path="*" element={<ErrorRoute />} />
+        <Route path="*" element={<ErrorPage />} />
         <Route path="/" element={<Articles />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/articles/:topic" element={<Articles />} />
