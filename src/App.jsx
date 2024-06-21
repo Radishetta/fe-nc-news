@@ -11,7 +11,6 @@ function App() {
   return (
     <main>
       <Header />
-      <Navbar />
       <Users />
       <Routes>
         <Route path="*" element={<ErrorPage />} />

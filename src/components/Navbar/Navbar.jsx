@@ -1,14 +1,11 @@
-import { useNavigate, Link } from "react-router-dom";
-import { UsersContext } from "../../contexts/UsersContext";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { getTopics } from "../../utils/api";
 import ErrorPage from "../Error/ErrorPage";
 import "../../styles/Navbar.css";
+import ButtonAppBar from "./ButtonAppBar";
 
 const Navbar = () => {
-  const navigate = useNavigate();
   const [topics, setTopics] = useState([]);
-  const { users, setLoggedUser } = useContext(UsersContext);
   const [err, setErr] = useState(null);
 
   useEffect(() => {
@@ -21,43 +18,8 @@ const Navbar = () => {
       });
   }, []);
 
-  const handleHomeButton = () => {
-    navigate("/articles");
-  };
-
-  const handleUserOptions = (e) => {
-    if (e.target.value === "Log in...") {
-      setLoggedUser("");
-    } else {
-      setLoggedUser(e.target.value);
-    }
-  };
-
   err ? <ErrorPage err={err} /> : null;
-  return (
-    <nav>
-      <Link to="/articles">
-        <button onClick={handleHomeButton}>Home</button>
-      </Link>
-      {topics.map((topic) => {
-        return (
-          <button key={topic.slug}>
-            <Link to={`/articles/${topic.slug}`}>{topic.slug}</Link>
-          </button>
-        );
-      })}
-      <select onClick={handleUserOptions} name="users">
-        <option value="">Log in...</option>
-        {users.map((user) => {
-          return (
-            <option value={user.username} key={user.username}>
-              {user.username}
-            </option>
-          );
-        })}
-      </select>
-    </nav>
-  );
+  return <ButtonAppBar topics={topics} />;
 };
 
 export default Navbar;

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ArticleCard from "./ArticleCard";
+import ArticleReviewCard from "./ArticleReviewCard";
 import { getArticles } from "../../utils/api";
 import "../../styles/Articles.css";
 import { useParams } from "react-router-dom";
@@ -60,6 +61,7 @@ const Articles = () => {
       </select>
       <ul className="articles">
         {articles.map((article) => {
+          return <ArticleReviewCard article={article} key={article.article_id} />;
           return <ArticleCard article={article} key={article.article_id} />;
         })}
       </ul>
